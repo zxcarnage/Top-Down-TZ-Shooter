@@ -15,7 +15,7 @@ namespace Presenters.Player
 
         public PlayerAnimatorPresenter(Animator animator, MovementModel movementModel, Transform playerTransform)
         {
-            InvariantChecker.CheckObjectInvariant(animator,movementModel);
+            InvariantChecker.CheckObjectInvariant<PlayerAnimatorPresenter>(animator,movementModel);
 
             _animator = animator;
             _movementModel = movementModel;

@@ -5,12 +5,12 @@ namespace Utils
 
     public static class InvariantChecker
     {
-        public static void CheckObjectInvariant(params object[] args)
+        public static void CheckObjectInvariant<ClassFrom>(params object[] args)
         {
             foreach (var arg in args)
             {
                 if (arg == null)
-                    throw new NullReferenceException();
+                    throw new NullReferenceException($"The {arg.GetType()} is null\nThe CheckObjectInvariant called from {nameof(ClassFrom)}");
             }
         }
 

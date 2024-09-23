@@ -15,7 +15,7 @@ namespace Presenters.Camera
         
         public CameraFollowerPresenter(PlayerMoveView player, Transform cameraTransform, CameraConfig cameraConfig)
         {
-            InvariantChecker.CheckObjectInvariant(player, cameraTransform);
+            InvariantChecker.CheckObjectInvariant<CameraFollowerPresenter>(player, cameraTransform);
             _cameraConfig = cameraConfig;
             _playerTransform = player.transform;
             _cameraTransform = cameraTransform;

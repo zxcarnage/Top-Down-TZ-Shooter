@@ -1,3 +1,8 @@
+using Models.DetectedEnemiesModel;
+using Models.PlayerRotation;
+using Models.WeaponModel;
+using Presenters.ObjectPool.ShootObjectPool;
+using Presenters.ProjectileFactory;
 using UnityEngine;
 using Views.Player;
 using Zenject;
@@ -9,11 +14,53 @@ namespace Installers
         [SerializeField] private PlayerMoveView _player;
         [SerializeField] private Transform _playerSpawnPoint;
         [SerializeField] private Camera _mainCamera;
+        [SerializeField] private Transform _shotsParent;
         
         public override void InstallBindings()
         {
+            BindPlayerRotationModel();
+            BindWeaponModel();
+            BindProjectileFactory();
+            BindShotObjectPool();
+            BindDetectedEnemiesModel();
             BindMainCamera();
             InstallPlayer();
+        }
+        
+        private void BindPlayerRotationModel()
+        {
+            Container.Bind<PlayerRotationModel>()
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void BindWeaponModel()
+        {
+            Container.Bind<WeaponModel>()
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void BindProjectileFactory()
+        {
+            Container.Bind<ProjectileFactory>()
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void BindShotObjectPool()
+        {
+            Container.Bind<ShootObjectPool>()
+                .AsSingle()
+                .WithArguments(_shotsParent)
+                .NonLazy();
+        }
+
+        private void BindDetectedEnemiesModel()
+        {
+            Container.Bind<DetectedEnemiesModel>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindMainCamera()

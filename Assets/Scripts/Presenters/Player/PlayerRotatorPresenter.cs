@@ -1,29 +1,28 @@
-﻿using UnityEngine;
+using Models.PlayerRotation;
+using UnityEngine;
 using Utils;
 
 namespace Presenters.Player
 {
-
     public class PlayerRotatorPresenter
     {
-        private readonly Transform _playerGameModelTransform;
-        private readonly UnityEngine.Camera _mainCamera;
+        private readonly PlayerRotationModel _model;
+        private readonly Transform _playerTransform;
 
-        public PlayerRotatorPresenter(UnityEngine.Camera mainCamera, Transform playerGameModelTransform)
+        public PlayerRotatorPresenter(PlayerRotationModel model, Transform playerTransform)
         {
-            InvariantChecker.CheckObjectInvariant( playerGameModelTransform, mainCamera);
-            
-            _mainCamera = mainCamera;
-            _playerGameModelTransform = playerGameModelTransform;
+            InvariantChecker.CheckObjectInvariant<PlayerRotatorPresenter>(model, playerTransform);
+
+            _playerTransform = playerTransform;
+            _model = model;
         }
-        
+
         public void TryRotate()
         {
-            Plane plane = new Plane(Vector3.up, _playerGameModelTransform.position);
-            Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (plane.Raycast(ray, out var hitDistance))
-                _playerGameModelTransform.forward = ray.GetPoint(hitDistance) - _playerGameModelTransform.position;
+            if (_model.TargetRotationTransform != null)
+                _playerTransform.forward =
+                    (_model.TargetRotationTransform.position - _playerTransform.position).normalized;
+
         }
     }
-
 }

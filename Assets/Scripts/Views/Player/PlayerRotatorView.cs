@@ -1,23 +1,22 @@
-﻿using System;
+using System;
+using Models.PlayerRotation;
 using Presenters.Player;
-using ScriptableObjects;
 using UnityEngine;
 using Zenject;
 
 namespace Views.Player
 {
-    [RequireComponent(typeof(Rigidbody))]
     public class PlayerRotatorView : MonoBehaviour
     {
         private PlayerRotatorPresenter _presenter;
 
         [Inject]
-        public void Initialize(UnityEngine.Camera mainCamera, Transform playerModelTransform)
+        public void Initialize(PlayerRotationModel _model)
         {
-            _presenter = new PlayerRotatorPresenter(mainCamera, playerModelTransform);
+            _presenter = new(_model, GetComponent<Transform>());
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             _presenter.TryRotate();
         }

@@ -16,7 +16,7 @@ namespace Presenters.Player
 
         public PlayerMovePresenter(MovementModel movementModel, PlayerConfig playerConfig, Rigidbody playerRigidbody)
         {
-            InvariantChecker.CheckObjectInvariant(movementModel, playerRigidbody, playerConfig);
+            InvariantChecker.CheckObjectInvariant<PlayerMovePresenter>(movementModel, playerRigidbody, playerConfig);
             _movementModel = movementModel;
             _playerConfig = playerConfig;
             _playerRigidbody = playerRigidbody;

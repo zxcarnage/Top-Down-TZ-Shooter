@@ -11,7 +11,7 @@ namespace Presenters.Player
 
         public PlayerInputPresenter(InputService inputService, MovementModel movementModel)
         {
-            InvariantChecker.CheckObjectInvariant(inputService, movementModel);
+            InvariantChecker.CheckObjectInvariant<PlayerInputPresenter>(inputService, movementModel);
 
             _inputService = inputService;
             _movementModel = movementModel;

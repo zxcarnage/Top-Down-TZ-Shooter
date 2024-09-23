@@ -1,4 +1,5 @@
 using Models.MovementModel;
+using Models.PlayerRotation;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +12,7 @@ namespace Installers.GameObjectInstallers
         
         public override void InstallBindings()
         {
+            
             BindPlayerModelTransform();
             BindMovementModel();
             BindPlayerAnimator();

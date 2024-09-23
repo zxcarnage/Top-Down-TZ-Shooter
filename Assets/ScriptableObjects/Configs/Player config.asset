@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 150
   _angularSpeed: 720
+  _rotateDuration: 0.1

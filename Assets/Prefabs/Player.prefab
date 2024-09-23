@@ -191,6 +191,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9125038706455228050}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &243967699093674282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3909810107216287052}
+  m_Layer: 0
+  m_Name: ShotsSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3909810107216287052
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243967699093674282}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.4, z: 0.46}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7128716729307542067}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &260699535337404617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,9 +1375,12 @@ GameObject:
   - component: {fileID: 897319894906823543}
   - component: {fileID: 1265242034225936835}
   - component: {fileID: 6367437508881421913}
-  - component: {fileID: 9202372251874767644}
   - component: {fileID: 3797166469565312614}
   - component: {fileID: 2061852683079572645}
+  - component: {fileID: 8949720122428238485}
+  - component: {fileID: 8220444725756317818}
+  - component: {fileID: 7804670556184008915}
+  - component: {fileID: 7275536348746370799}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1369,6 +1403,7 @@ Transform:
   m_Children:
   - {fileID: 3481344045155043942}
   - {fileID: 6060328395884819227}
+  - {fileID: 3909810107216287052}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3987570026678749203
@@ -1450,18 +1485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1705a4d396094d5eb34570593df827e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9202372251874767644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4445336600780199227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 592a54ce000d4a58a1c2f861a7833559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3797166469565312614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1484,6 +1507,66 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffb8a6dfc5144778a919b0ee3060c3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8949720122428238485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4445336600780199227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f5db4947664b939903766884654e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shotsSpawnPoint: {fileID: 3909810107216287052}
+--- !u!114 &8220444725756317818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4445336600780199227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b532018d414457ac7cf2445b94aabf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &7804670556184008915
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4445336600780199227}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5.5755205
+  m_Height: 11.151041
+  m_Direction: 1
+  m_Center: {x: -0.034166336, y: 1.1657801, z: 0}
+--- !u!114 &7275536348746370799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4445336600780199227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955a5a34a3bd4e5abdb33a091f1529cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4465621788581844030

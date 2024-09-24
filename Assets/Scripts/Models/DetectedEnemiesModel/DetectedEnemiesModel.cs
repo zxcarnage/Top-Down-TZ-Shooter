@@ -16,6 +16,7 @@ namespace Models.DetectedEnemiesModel
         }
 
         public event Action<Transform> EnemyDetected;
+        public event Action<Transform> EnemyExited;
 
         public void DetectEnemy(Transform enemyTransform)
         {

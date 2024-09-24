@@ -25,5 +25,11 @@ namespace Views.Player
                 _presenter.DetectEnemy(enemyView.transform);
             }
         }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if(other.TryGetComponent(out EnemyView enemyView))
+                Debug.Log("OnTriggerExit");
+        }
     }
 }

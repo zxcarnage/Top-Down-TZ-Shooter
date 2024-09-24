@@ -7,9 +7,7 @@ namespace ScriptableObjects
     {
         [Header("Movement")]
         [SerializeField] private float _movementSpeed;
-        [SerializeField] private float _angularSpeed;
 
         public float MovementSpeed => _movementSpeed;
-        public float AngularSpeed => _angularSpeed;
     }
 }

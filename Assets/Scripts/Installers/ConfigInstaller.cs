@@ -9,12 +9,22 @@ namespace Installers
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private CameraConfig _cameraConfig;
         [SerializeField] private WeaponConfig _weaponConfig;
+        [SerializeField] private SpawnerConfig _spawnerConfig;
         
         public override void InstallBindings()
         {
+            BindSpawnConfig();
             BindWeaponConfig();
             BindCameraConfig();
             BindConfigInstaller();
+        }
+
+        private void BindSpawnConfig()
+        {
+            Container.Bind<SpawnerConfig>()
+                .FromScriptableObject(_spawnerConfig)
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindWeaponConfig()

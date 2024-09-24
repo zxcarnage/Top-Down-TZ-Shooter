@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using DefaultNamespace.Dummies;
+using DefaultNamespace.Presenters.Enemy.EnemyFactory;
 using Models.DetectedEnemiesModel;
 using Models.PlayerRotation;
 using Models.WeaponModel;
@@ -15,9 +18,12 @@ namespace Installers
         [SerializeField] private Transform _playerSpawnPoint;
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private Transform _shotsParent;
+        [SerializeField] private List<EnemySpawnPoint> _enemySpawnPoints;   
         
         public override void InstallBindings()
         {
+            BindEnemySpawnPoints();
+            BindEnemyFactory();
             BindPlayerRotationModel();
             BindWeaponModel();
             BindProjectileFactory();
@@ -26,7 +32,22 @@ namespace Installers
             BindMainCamera();
             InstallPlayer();
         }
-        
+
+        private void BindEnemySpawnPoints()
+        {
+            Container.Bind<List<EnemySpawnPoint>>()
+                .FromInstance(_enemySpawnPoints)
+                .AsSingle()
+                .NonLazy();
+        }
+
+        private void BindEnemyFactory()
+        {
+            Container.Bind<EnemyFactory>()
+                .AsSingle()
+                .NonLazy();
+        }
+
         private void BindPlayerRotationModel()
         {
             Container.Bind<PlayerRotationModel>()

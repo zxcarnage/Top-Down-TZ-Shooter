@@ -3,32 +3,31 @@ using System.Collections.Generic;
 using ModestTree;
 using UnityEngine;
 using Utils;
+using Views.Enemy;
 
 namespace Models.DetectedEnemiesModel
 {
     public class DetectedEnemiesModel
     {
-        private readonly Queue<Transform> _enemyTransforms;
-
         public DetectedEnemiesModel()
         {
-            _enemyTransforms = new Queue<Transform>();
+            EnemyTransforms = new List<EnemyView>();
         }
 
-        public event Action<Transform> EnemyDetected;
-        public event Action<Transform> EnemyExited;
+        public List<EnemyView> EnemyTransforms { get; private set; }
+        public event Action<EnemyView> DetectedEnemy;
 
-        public void DetectEnemy(Transform enemyTransform)
+        public void DetectEnemy(EnemyView enemy)
         {
-            InvariantChecker.CheckObjectInvariant<DetectedEnemiesModel>(enemyTransform);
+            InvariantChecker.CheckObjectInvariant<DetectedEnemiesModel>(enemy);
             
-            _enemyTransforms.Enqueue(enemyTransform);
-            EnemyDetected?.Invoke(DequeueEnemy());
+            EnemyTransforms.Add(enemy);
+            DetectedEnemy?.Invoke(enemy);
         }
 
-        private Transform DequeueEnemy()
+        public void UndetectEnemy(EnemyView enemy)
         {
-            return _enemyTransforms.IsEmpty() ? null : _enemyTransforms.Dequeue();
+            EnemyTransforms.Remove(enemy);
         }
     }
 }

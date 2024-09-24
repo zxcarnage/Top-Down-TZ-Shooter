@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DefaultNamespace;
@@ -11,6 +12,7 @@ using Presenters.ObjectPool.ShootObjectPool;
 using ScriptableObjects;
 using UnityEngine;
 using Utils;
+using Views.Enemy;
 
 namespace Presenters.Player
 {
@@ -27,6 +29,7 @@ namespace Presenters.Player
 
         private Transform _target;
         private Vector3 _targetRotation;
+        private float _shootDelay;
 
         public PlayerShootPresenter(WeaponModel weaponModel, DetectedEnemiesModel detectedEnemiesModel, Transform playerModelTransform, Transform shotsParent, 
             PlayerConfig playerConfig, ShootObjectPool shootObjectPool, PlayerRotationModel playerRotationModel)
@@ -44,56 +47,47 @@ namespace Presenters.Player
             _cts = new CancellationTokenSource();
         }
 
-        public void Enable()
+        public void ShootClosest()
         {
-            _detectedEnemiesModel.EnemyDetected += OnEnemyDetected;
-        }
-
-        public void Disable()
-        {
-            _detectedEnemiesModel.EnemyDetected -= OnEnemyDetected;
-        }
-
-        private void OnEnemyDetected(Transform enemy)
-        {
-            if (_target != null)
-                return;
-            _target = enemy;
-            RotateAndShootTask(enemy, _cts.Token).Forget();
-        }
-
-        private async UniTask RotateAndShootTask(Transform enemy, CancellationToken token)
-        {
-            _playerRotationModel.RotatePlayer(enemy);
-            while (_target != null)
+            var target = FindNearestActiveEnemy();
+            if (target != null)
             {
-                TryShoot();
-                await UniTask.Delay((int) (1000 * _weaponModel.FireRate), cancellationToken:token);
+                _target = target.transform;
+                _playerRotationModel.RotatePlayer(_target);
+                HandleShootTimer(_target);
             }
         }
 
-        private async UniTask Rotate(Transform enemy)
+        private EnemyView FindNearestActiveEnemy()
         {
-            _targetRotation = (enemy.transform.position - _playerModelTransform.position).normalized;
-            while (_playerModelTransform.forward != _targetRotation)
-            {
-                await _playerModelTransform.DORotate(_targetRotation, _playerConfig.RotateDuration);
-            }
+            return _detectedEnemiesModel.EnemyTransforms
+                .OrderBy(enemy => Vector3.Distance(enemy.transform.position, _playerModelTransform.position))
+                .FirstOrDefault(enemy => enemy.gameObject.activeSelf == true);
+        }
 
-            _playerRotationModel.RotatePlayer(enemy);
+        private void HandleShootTimer(Transform target)
+        {
+            if (_shootDelay >= _weaponModel.FireRate)
+                TryShoot(target);
+            else
+                _shootDelay += Time.fixedDeltaTime;
         }
 
         //Пока что предполагается что оружие одно, если бы оружий было несколько можно было бы сделать ObjectPool
+
         //Под несколько типов проджектайлов и менять их в рантайме
-        private void TryShoot()
+
+        private void TryShoot(Transform target)
         {
             _shootObjectPool.Get(ProjectileType.Common).TryGetComponent(out ProjectileView projectileView);
             if (projectileView != null)
             {
                 projectileView.gameObject.SetActive(true);
                 projectileView.transform.position = _shotsParent.position;
-                projectileView.Shoot(_target);
+                projectileView.Shoot(target);
             }
+
+            _shootDelay = 0f;
         }
     }
 }

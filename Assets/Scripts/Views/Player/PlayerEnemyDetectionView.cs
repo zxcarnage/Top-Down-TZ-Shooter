@@ -22,14 +22,14 @@ namespace Views.Player
         {
             if (other.gameObject.TryGetComponent(out EnemyView enemyView))
             {
-                _presenter.DetectEnemy(enemyView.transform);
+                _presenter.DetectEnemy(enemyView);
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if(other.TryGetComponent(out EnemyView enemyView))
-                Debug.Log("OnTriggerExit");
+            if (other.TryGetComponent(out EnemyView enemyView))
+                _presenter.UndetectEnemy(enemyView);
         }
     }
 }

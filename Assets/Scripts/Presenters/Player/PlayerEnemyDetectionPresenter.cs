@@ -1,6 +1,7 @@
 using Models.DetectedEnemiesModel;
 using UnityEngine;
 using Utils;
+using Views.Enemy;
 
 namespace Presenters.Player
 {
@@ -15,9 +16,14 @@ namespace Presenters.Player
             _detectedEnemiesModel = detectedEnemiesModel;
         }
 
-        public void DetectEnemy(Transform enemyViewTransform)
+        public void DetectEnemy(EnemyView enemyViewTransform)
         {
             _detectedEnemiesModel.DetectEnemy(enemyViewTransform);
+        }
+
+        public void UndetectEnemy(EnemyView enemyViewTransform)
+        {
+            _detectedEnemiesModel.UndetectEnemy(enemyViewTransform);
         }
     }
 }

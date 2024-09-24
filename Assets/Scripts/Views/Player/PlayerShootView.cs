@@ -1,3 +1,5 @@
+using System;
+using Cysharp.Threading.Tasks;
 using Models.DetectedEnemiesModel;
 using Models.PlayerRotation;
 using Models.WeaponModel;
@@ -20,14 +22,20 @@ namespace Views.Player
             _presenter = new PlayerShootPresenter(weaponModel,detectedEnemiesModel,playerTransform,_shotsSpawnPoint,playerConfig, shootObjectPool, rotationModel);
         }
 
-        private void OnEnable()
+        /*private void OnEnable()
         {
             _presenter.Enable();
+        }*/
+
+        private void FixedUpdate()
+        {
+            _presenter.ShootClosest();
         }
 
+        /*
         private void OnDisable()
         {
             _presenter.Disable();
-        }
+        }*/
     }
 }

@@ -3,11 +3,11 @@ using DefaultNamespace.Dummies;
 using DefaultNamespace.Models.Health;
 using DefaultNamespace.Presenters.Enemy.EnemyFactory;
 using Models.DetectedEnemiesModel;
+using Models.MovementModel;
 using Models.PlayerRotation;
 using Models.WeaponModel;
 using Presenters.ObjectPool.ShootObjectPool;
 using Presenters.ProjectileFactory;
-using ScriptableObjects;
 using UnityEngine;
 using Views.Player;
 using Zenject;
@@ -24,6 +24,7 @@ namespace Installers
         
         public override void InstallBindings()
         {
+            BindMovementModel();
             BindPlayerHealthModel();
             BindEnemySpawnPoints();
             BindEnemyFactory();
@@ -34,6 +35,13 @@ namespace Installers
             BindDetectedEnemiesModel();
             BindMainCamera();
             InstallPlayer();
+        }
+
+        private void BindMovementModel()
+        {
+            Container.Bind<MovementModel>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindPlayerHealthModel()

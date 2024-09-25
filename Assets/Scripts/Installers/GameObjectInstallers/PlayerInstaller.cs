@@ -13,7 +13,6 @@ namespace Installers.GameObjectInstallers
         public override void InstallBindings()
         {
             BindPlayerModelTransform();
-            BindMovementModel();
             BindPlayerAnimator();
         }
 
@@ -25,12 +24,7 @@ namespace Installers.GameObjectInstallers
                 .NonLazy();
         }
 
-        private void BindMovementModel()
-        {
-            Container.Bind<MovementModel>()
-                .AsSingle()
-                .NonLazy();
-        }
+        
 
         private void BindPlayerAnimator()
         {

@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using DefaultNamespace.Dummies;
+using DefaultNamespace.Models.Health;
 using DefaultNamespace.Presenters.Enemy.EnemyFactory;
 using Models.DetectedEnemiesModel;
 using Models.PlayerRotation;
 using Models.WeaponModel;
 using Presenters.ObjectPool.ShootObjectPool;
 using Presenters.ProjectileFactory;
+using ScriptableObjects;
 using UnityEngine;
 using Views.Player;
 using Zenject;
@@ -22,6 +24,7 @@ namespace Installers
         
         public override void InstallBindings()
         {
+            BindPlayerHealthModel();
             BindEnemySpawnPoints();
             BindEnemyFactory();
             BindPlayerRotationModel();
@@ -31,6 +34,13 @@ namespace Installers
             BindDetectedEnemiesModel();
             BindMainCamera();
             InstallPlayer();
+        }
+
+        private void BindPlayerHealthModel()
+        {
+            Container.Bind<HealthModel>()
+                .AsSingle()
+                .NonLazy();
         }
 
         private void BindEnemySpawnPoints()

@@ -6,7 +6,7 @@ namespace Installers
 {
     public class ConfigInstaller : MonoInstaller
     {
-        [SerializeField] private PlayerConfig _playerConfig;
+        [SerializeField] private CharacterConfig _playerConfig;
         [SerializeField] private CameraConfig _cameraConfig;
         [SerializeField] private WeaponConfig _weaponConfig;
         [SerializeField] private SpawnerConfig _spawnerConfig;
@@ -45,7 +45,7 @@ namespace Installers
 
         private void BindConfigInstaller()
         {
-            Container.Bind<PlayerConfig>()
+            Container.Bind<CharacterConfig>()
                 .FromScriptableObject(_playerConfig)
                 .AsSingle()
                 .NonLazy();

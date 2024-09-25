@@ -12,7 +12,7 @@ namespace Views.Player
         private PlayerMovePresenter _movePresenter;
 
         [Inject]
-        public void Initialize(MovementModel movementModel, PlayerConfig playerConfig)
+        public void Initialize(MovementModel movementModel, CharacterConfig playerConfig)
         {
             _movePresenter = new PlayerMovePresenter(movementModel, playerConfig, GetComponent<Rigidbody>());
         }

@@ -12,7 +12,6 @@ namespace Installers.GameObjectInstallers
         
         public override void InstallBindings()
         {
-            
             BindPlayerModelTransform();
             BindMovementModel();
             BindPlayerAnimator();

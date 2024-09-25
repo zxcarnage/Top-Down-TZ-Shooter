@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b3121245cffd074ebbccc3b26e6a983, type: 3}
-  m_Name: Player config
+  m_Script: {fileID: 11500000, guid: e9c0e09b7068bb4459d3c6405a6a7c5b, type: 3}
+  m_Name: Player Config
   m_EditorClassIdentifier: 
-  _movementSpeed: 150
-  _angularSpeed: 720
-  _rotateDuration: 0.1
+  _health: 100
+  _movementSpeed: 200

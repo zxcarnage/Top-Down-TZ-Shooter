@@ -10,11 +10,11 @@ namespace Presenters.Player
     {
         private readonly MovementModel _movementModel;
         private readonly Rigidbody _playerRigidbody;
-        private readonly PlayerConfig _playerConfig;
+        private readonly CharacterConfig _playerConfig;
 
         private Vector3 _moveDirection;
 
-        public PlayerMovePresenter(MovementModel movementModel, PlayerConfig playerConfig, Rigidbody playerRigidbody)
+        public PlayerMovePresenter(MovementModel movementModel, CharacterConfig playerConfig, Rigidbody playerRigidbody)
         {
             InvariantChecker.CheckObjectInvariant<PlayerMovePresenter>(movementModel, playerRigidbody, playerConfig);
             _movementModel = movementModel;

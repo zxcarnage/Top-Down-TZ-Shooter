@@ -21,8 +21,6 @@ namespace Presenters.Player
         private readonly WeaponModel _weaponModel;
         private readonly DetectedEnemiesModel _detectedEnemiesModel;
         private readonly Transform _playerModelTransform;
-        private readonly PlayerConfig _playerConfig;
-        private readonly CancellationTokenSource _cts;
         private readonly ShootObjectPool _shootObjectPool;
         private readonly PlayerRotationModel _playerRotationModel;
         private readonly Transform _shotsParent;
@@ -32,19 +30,16 @@ namespace Presenters.Player
         private float _shootDelay;
 
         public PlayerShootPresenter(WeaponModel weaponModel, DetectedEnemiesModel detectedEnemiesModel, Transform playerModelTransform, Transform shotsParent, 
-            PlayerConfig playerConfig, ShootObjectPool shootObjectPool, PlayerRotationModel playerRotationModel)
+            ShootObjectPool shootObjectPool, PlayerRotationModel playerRotationModel)
         {
-            InvariantChecker.CheckObjectInvariant<PlayerShootPresenter>(weaponModel, detectedEnemiesModel,playerConfig, playerModelTransform,shotsParent, shootObjectPool,playerRotationModel);
+            InvariantChecker.CheckObjectInvariant<PlayerShootPresenter>(weaponModel, detectedEnemiesModel, playerModelTransform,shotsParent, shootObjectPool,playerRotationModel);
 
             _weaponModel = weaponModel;
             _detectedEnemiesModel = detectedEnemiesModel;
             _playerModelTransform = playerModelTransform;
-            _playerConfig = playerConfig;
             _shootObjectPool = shootObjectPool;
             _playerRotationModel = playerRotationModel;
             _shotsParent = shotsParent;
-            
-            _cts = new CancellationTokenSource();
         }
 
         public void ShootClosest()

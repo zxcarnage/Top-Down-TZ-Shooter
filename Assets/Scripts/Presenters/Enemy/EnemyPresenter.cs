@@ -1,5 +1,6 @@
 using System;
 using DefaultNamespace.Models.Health;
+using UnityEngine;
 using Utils;
 using Views.Enemy;
 
@@ -20,6 +21,7 @@ namespace DefaultNamespace.Presenters.Enemy
         public void TakeDamage(float damage)
         {
             _healthModel.Decrease(damage);
+            Debug.Log($"{_healthModel.Health}");
         }
 
         public void Enable()

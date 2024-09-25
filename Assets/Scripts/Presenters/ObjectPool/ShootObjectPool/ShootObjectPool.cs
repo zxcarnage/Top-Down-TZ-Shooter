@@ -14,7 +14,7 @@ namespace Presenters.ObjectPool.ShootObjectPool
         private readonly IFactory _factory;
         private readonly Transform _parentTransform;
         
-        private const int SpawnAmount = 30;
+        private const int SpawnAmount = 500;
 
         public ShootObjectPool(ProjectileFactory.ProjectileFactory factory, Transform parenTransform)
         {

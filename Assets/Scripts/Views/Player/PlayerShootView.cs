@@ -17,25 +17,14 @@ namespace Views.Player
         private PlayerShootPresenter _presenter;
         
         [Inject]
-        public void Initialize(WeaponModel weaponModel, DetectedEnemiesModel detectedEnemiesModel, Transform playerTransform, PlayerConfig playerConfig, ShootObjectPool shootObjectPool, PlayerRotationModel rotationModel)
+        public void Initialize(WeaponModel weaponModel, DetectedEnemiesModel detectedEnemiesModel, Transform playerTransform, ShootObjectPool shootObjectPool, PlayerRotationModel rotationModel)
         {
-            _presenter = new PlayerShootPresenter(weaponModel,detectedEnemiesModel,playerTransform,_shotsSpawnPoint,playerConfig, shootObjectPool, rotationModel);
+            _presenter = new PlayerShootPresenter(weaponModel,detectedEnemiesModel,playerTransform,_shotsSpawnPoint, shootObjectPool, rotationModel);
         }
-
-        /*private void OnEnable()
-        {
-            _presenter.Enable();
-        }*/
-
+        
         private void FixedUpdate()
         {
             _presenter.ShootClosest();
         }
-
-        /*
-        private void OnDisable()
-        {
-            _presenter.Disable();
-        }*/
     }
 }
